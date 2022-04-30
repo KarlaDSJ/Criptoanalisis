@@ -14,10 +14,8 @@ def encuentra_contra(sal, contra_hash, contras):
     for i in contras:        
         aux = sal+i
         aux2 = i+sal
-        # probar con blake2s
         salida1 = int(hashlib.sha3_256(aux.encode('latin1')).hexdigest(), 16)
         salida2 = int(hashlib.sha3_256(aux2.encode('latin1')).hexdigest(), 16)
-        # print(type(contra_hash), type(salida1))
         if salida1 & contra_hash or salida2 & contra_hash:
             return i
 
@@ -40,7 +38,7 @@ def get_batch(batchSize):
             yield batch
 
 def desencripta_una(id):
-    gen = get_batch(1000)
+    gen = get_batch(10000)
     for batch in gen:
         x = encuentra_contra(users[id][0], users[id][1], batch)
         if x != None:
@@ -48,10 +46,9 @@ def desencripta_una(id):
     print("no respuesta")
 
 def desencripta():
-    resp = []
-    for id in range(10):
-        resp.append(desencripta_una(id))
-        break
-    return resp 
+    with open('user_pass.txt','w') as file:
+        for id in range(len(users)):
+            file.write("usuario {} {}\n".format(id,desencripta_una(id).encode('latin-1')))            
+    return "Terminamos :)" 
 
 print(desencripta())

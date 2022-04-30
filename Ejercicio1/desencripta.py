@@ -1,5 +1,5 @@
 from sys import argv
-import os 
+import os
 
 def egcd(a, b):
     if a == 0:
@@ -8,6 +8,7 @@ def egcd(a, b):
         g, y, x = egcd(b % a, a)
         return (g, x - (b // a) * y, y)
 
+#Inverso multiplicativo de un modulo con modulo
 def modinv(a, m):
     # es x tal que a*x = 1 (mod m)
     g, x, y = egcd(a, m)
@@ -16,9 +17,9 @@ def modinv(a, m):
     else:
         return x % m
     
-    
+  
 def obtener_k():
-    with open(".xyz",'rb') as file:
+    with open('Mis archivos/.xyz','rb') as file:
         txt = file.read()
         c = txt[0]
         d = txt[1:33]
@@ -31,17 +32,19 @@ def obtener_k():
         return k
     
 def xx(x, k):
+    x = "Mis archivos/" + x
     file = x[:-4]
     with open(file,'wb') as z:
         z.write((lambda x:bytes([x[i]^k[i%16] for i in range(len(x))])) (open(x,'rb').read()))
         os.remove(x)   
         
         
-_,_,x = next(os.walk('./'))
-x.remove(argv[0])
+_,_,x = next(os.walk('./Mis archivos'))
 try:
-    x.remove('juego.py')
+    x.remove('juego.py')    
 except Exception:
     pass
 k = obtener_k()
-list(map(xx,x, k))
+x.remove('.xyz')
+list(map(lambda y: xx(y,k),x))
+os.remove('Mis archivos/.xyz') 

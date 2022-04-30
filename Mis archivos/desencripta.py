@@ -31,7 +31,8 @@ def obtener_k():
         return k
     
 def xx(x, k):
-    with open(x-'.enc','wb') as z:
+    file = x[:-4]
+    with open(file,'wb') as z:
         z.write((lambda x:bytes([x[i]^k[i%16] for i in range(len(x))])) (open(x,'rb').read()))
         os.remove(x)   
         

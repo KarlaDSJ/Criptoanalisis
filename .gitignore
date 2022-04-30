@@ -1,6 +1,5 @@
 .DS_Store
 .DS_S
-ejercicio2/users_pass.txt
 __pycache__/
 *.py[cod]
 *$py.class

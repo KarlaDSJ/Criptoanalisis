@@ -15,9 +15,8 @@ def relleno(mensaje):
 
 
 def aes128_cbc_enc(llave, mensaje):
-    aes = Cipher(AES(key), ECB())
+    aes = Cipher(AES(llave), ECB())
     enc = aes.encryptor()
-    # FALTA IMPLEMENTAR
     rell = relleno(mensaje)
     rell = bytes.fromhex(rell)
     mensaje = mensaje.encode()
@@ -27,14 +26,12 @@ def aes128_cbc_enc(llave, mensaje):
     
     c = [cuatro]
     i = 0
-    aes = Cipher(AES(llave), ECB())
-    enc = aes.encryptor()
     for bloque in bloques:
-        # c.append(bloque ^ c[i])
         resultado = int.from_bytes(bloque, byteorder="big") ^ int.from_bytes(c[i], byteorder="big")
         texto_encriptar = resultado.to_bytes(16, byteorder="big")
         c.append(enc.update(texto_encriptar))
         i +=1
+    enc.finalize()
     
     texto_cifrado = b''
     for cifrado in c:

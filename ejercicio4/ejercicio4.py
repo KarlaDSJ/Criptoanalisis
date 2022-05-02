@@ -4,7 +4,7 @@ from cryptography.hazmat.primitives.ciphers.modes import ECB
 import os
 
 def relleno(mensaje):
-    cant_relleno = 16 - len(mensaje) % 16
+    cant_relleno = (16- len(mensaje) % 16) % 16
     relleno = hex(cant_relleno)
     aux = hex(cant_relleno).lstrip("0x")
     if len(aux)<2:

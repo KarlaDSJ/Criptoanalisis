@@ -4,6 +4,15 @@ from cryptography.hazmat.primitives.ciphers.modes import ECB
 import os
 
 def relleno(mensaje):
+    """ Obtiene el relleno necesario para un mensaje
+    El relleno es una cadena de a lo más 16 bytes
+
+    Args:
+        mensaje (bytes): mensaje a encriptar
+
+    Returns:
+        bytes: relleno para que el tamaño del mensaje sea múltiplo de 16
+    """
     cant_relleno = 16- len(mensaje) % 16
     relleno = hex(cant_relleno)
     aux = hex(cant_relleno).lstrip("0x")
@@ -14,6 +23,14 @@ def relleno(mensaje):
     return relleno
 
 def quita_relleno(bloque):
+    """ Quita el relleno del último bloque del mensaje
+
+    Args:
+        bloque (bytes): bloque que tiene el relleno
+
+    Returns:
+        bytes: bloque sin relleno
+    """
     cant = bloque[-1]
     return bloque[:(16-cant)] 
 
@@ -88,37 +105,39 @@ def aes128_ctr_dec(llave, cifrado):
         c += desencriptado
     return c
 
-# Para hacer pruebas
-llave = b'Mi llave secreta'
-mensaje = b'Mensaje de texto mas grande que un bloque y de longitud que si es multiplo de 16'
-mensaje2 = b'UwU'
 
-"""print("---------------CBC--------------------")
-print("Mensaje 1: ", mensaje)
-texto_enc = aes128_cbc_enc(llave, mensaje)
-print("Texto cifrado: ", texto_enc)
+if __name__ == '__main__':
+    # Para hacer pruebas
+    llave = b'Mi llave secreta'
+    mensaje = b'Mensaje de texto mas grande que un bloque y de longitud que si es multiplo de 16'
+    mensaje2 = b'UwU'
 
-texto_claro = aes128_cbc_dec(llave, texto_enc)
-print("Mensaje original: ", texto_claro)
+    print("---------------CBC--------------------")
+    print("Mensaje 1: ", mensaje)
+    texto_enc = aes128_cbc_enc(llave, mensaje)
+    print("Texto cifrado: ", texto_enc)
 
-print("Mensaje 2: ", mensaje2)
-texto_enc = aes128_cbc_enc(llave, mensaje2)
-print("Texto cifrado: ", texto_enc)
+    texto_claro = aes128_cbc_dec(llave, texto_enc)
+    print("Mensaje original: ", texto_claro)
 
-texto_claro = aes128_cbc_dec(llave, texto_enc)
-print("Mensaje original: ", texto_claro)"""
+    print("Mensaje 2: ", mensaje2)
+    texto_enc = aes128_cbc_enc(llave, mensaje2)
+    print("Texto cifrado: ", texto_enc)
 
-print("---------------CTR--------------------")
-print("Mensaje 1: ", mensaje)
-texto_enc = aes128_ctr_enc(llave, mensaje)
-print("Texto cifrado: ", texto_enc)
+    texto_claro = aes128_cbc_dec(llave, texto_enc)
+    print("Mensaje original: ", texto_claro)
 
-texto_claro = aes128_ctr_dec(llave, texto_enc)
-print("Mensaje original: ", texto_claro)
+    print("---------------CTR--------------------")
+    print("Mensaje 1: ", mensaje)
+    texto_enc = aes128_ctr_enc(llave, mensaje)
+    print("Texto cifrado: ", texto_enc)
 
-print("Mensaje 2: ", mensaje2)
-texto_enc =aes128_ctr_enc(llave, mensaje2)
-print("Texto cifrado: ", texto_enc)
+    texto_claro = aes128_ctr_dec(llave, texto_enc)
+    print("Mensaje original: ", texto_claro)
 
-texto_claro = aes128_ctr_dec(llave, texto_enc)
-print("Mensaje original: ", texto_claro)
+    print("Mensaje 2: ", mensaje2)
+    texto_enc =aes128_ctr_enc(llave, mensaje2)
+    print("Texto cifrado: ", texto_enc)
+
+    texto_claro = aes128_ctr_dec(llave, texto_enc)
+    print("Mensaje original: ", texto_claro)

@@ -14,6 +14,22 @@ cd ejercicio1
 python3 desencripta.py
 ```
 
+Para este ejercicio hicimos un análisis del archivo "juego.py", en donde notamos
+que a cada archivo se le aplicaba un xor con una cadena de 16 bytes llamada k. Ésta 
+k se guarda en un archivo oculto, claro, encriptada. 
+
+Para poder desencriptar abrimos el archivo oculto y separamos los 65 bytes en 3:
+- c : es un byte que nos ayuda a denecriptar la k
+- d : cadena de 16 bytes que ayuda a denecriptar la k
+- k encriptada : cadena de 16 bytes encriptada
+
+E hicimos el proceso inverso para encriptar la k:
+    Encriptar: k_encriptada = d*k%(1<<c)
+    Desencriptar : k = (k__encriptada * modinv(d, 1<<c) ) % (1<<c)
+
+donde modinv(a, m) indica el inverso multiplicativo de a módulo m
+Finalmente aplicamos el xor como en el archivo juego.py a cada archivo encriptado. 
+
 ## Ejercicio 2
 
 Para correrlo:
@@ -25,14 +41,12 @@ python3 ejercicio2.py
 Las contraseñas de cada usuario se encuentran en ejercicio2/user_pass.txt
 
 
-Contaseña de juanito 
+### Contaseña de juanito 
 
-```
-WqàñFCAdv¨p¡À
-i"'h®¤ìÈÛÀÇÙÍmxÅÚÎnºéñG©9áAEÉÌ
-                              <`
-v
-```
+No pudimos encontrarla ya que el hecho de que usemos el algoritmo de scrypt con los 
+parámetros que se nos dan hace que sea mucho más tardado encriptar. 
+
+FALTA agregar un estimado del tiempo para que nos la de 
 
 ## Ejercicio 3
 Dado el identificador de un bloque de transacciones id, de longitud 16 bytes, los mineros tienen el reto de encontrar una cadena x de 16 bytes tal que el digesto generado por BLAKE2s-256(id||x) tiene al principio una cadena de bytes especial.

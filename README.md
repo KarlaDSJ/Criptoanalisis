@@ -1,7 +1,7 @@
 # Criptoanálisis
 
 ## Equipo de trabajo:
-- Kethrim, [*DanyDolphin*](https://github.com/DanyDolphin)
+- Kethrim, [*Kethrim*](https://github.com/Kethrim)
 - Miguel, [*josemigueltr*](https://github.com/josemigueltr)
 - Ariana, [*arianafm*](https://github.com/arianafm)
 - Karla, [*KarlaDSJ*](https://github.com/KarlaDSJ)

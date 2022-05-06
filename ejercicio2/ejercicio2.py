@@ -95,7 +95,7 @@ def contra_juanito():
     contra_hash = bytes.fromhex("5f495364792782144918397bdbb72bc04326a883138a11f3d0b61a3d2576ca00")
     contrasenias = get_batch(1000)
     for i in contrasenias:         
-        salida = hashlib.scrypt(i, salt=sal,n=2**16, r=8, p=1, maxmem=2**30)
+        salida = hashlib.scrypt(i, salt=sal,n=2**16, r=8, p=1, maxmem=2**30, dklen=32)
         if salida == contra_hash:
             return i
 

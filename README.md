@@ -101,7 +101,7 @@ BLAKE2s-256(id || x) = b"\xf0\x9f\xa4\x91\xad\xa2\x9bgr\xb4\xba\xd7N\xbf\x81\xa1
 
 <a id="ejercicio-4"></a>
 ## Implementando modos de operación  <small>[[Top](#ejercicio)]</small>
-Se mplementan las funciones de cifrado y descifrado de los modos CBC y CTR usando AES con llaves de 128 bits, utilizando el modo ECB como base para poder aplicar $AES_k$ o $AES_k^{-1}$
+Se implementan las funciones de cifrado y descifrado de los modos CBC y CTR usando AES con llaves de 128 bits, utilizando el modo ECB como base para poder aplicar $AES_k$ o $AES_k^{-1}$
 
 Para correrlo
 ```
